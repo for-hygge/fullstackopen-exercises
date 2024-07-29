@@ -9,19 +9,19 @@ const Button = ({ desc, handleClicks}) => {
 const StatisticLine = (props) => {
     if(props.text==='all') {
         return (
-            <p>{props.text} {props.totalClicks}</p>
+            <tr><td>{props.text}</td><td>{props.totalClicks}</td></tr>
         );
     } else if(props.text==='average') {
         return (
-            <p>{props.text} {(props.clicks.good-props.clicks.bad)/3}</p>
+            <tr><td>{props.text}</td><td>{(Number(props.clicks.good-props.clicks.bad)/3).toFixed(1)}</td></tr>
         );
     } else if(props.text==='positive') {
         return (
-            <p>{props.text} {props.totalClicks===0? 0: props.clicks.good / props.totalClicks}%</p>
+            <tr><td>{props.text}</td><td>{Number(props.totalClicks===0? 0: props.clicks.good / props.totalClicks).toFixed(1)}%</td></tr>
         );
     } else {
         return (
-            <p>{props.text} {props.clicks[props.text]}</p>
+            <tr><td>{props.text}</td><td>{props.clicks[props.text]}</td></tr>
         );
     }
 }
@@ -33,14 +33,14 @@ const Statistics = (props) => {
         );
     } else {
         return (
-            <div>
+            <table>
                 <StatisticLine text='good' clicks={props.clicks} />
                 <StatisticLine text='neutral' clicks={props.clicks} />
                 <StatisticLine text='bad' clicks={props.clicks} />
                 <StatisticLine text='all' totalClicks={props.totalClicks} />
                 <StatisticLine text='average' clicks={props.clicks} />
                 <StatisticLine text='positive' clicks={props.clicks} totalClicks={props.totalClicks} />
-            </div>
+            </table>
         );
     }
     
